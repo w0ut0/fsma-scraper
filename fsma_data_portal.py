@@ -36,9 +36,5 @@ class ManagerTransaction(scrapy.Spider):
         yield from response.follow_all(transaction_links, self.parse_node_details)
 
 
-        # for next_page in response.css(
-        #     ".pager__item--next"
-        # ).xpath(".//a"):
-        #     yield response.follow(next_page, self.parse)
-
-
+        for next_page in response.css(".pager__item--next").xpath(".//a"):
+            yield response.follow(next_page, self.parse)
